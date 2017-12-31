@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0,user-scalable=no">
+    <!--name="viewport" content="width=device-width, initial-scale=1.0"-->
+    <title>Title</title>
+    <link href="../bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
+    <script src="../bootstrap-3.3.7-dist/js/jquery-3.2.js"></script>
+    <script src="../bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <style>
+        body{
+            background-color: #e6ede6;
+            padding: 50px;
+        }
+        .clearfix{
+            /*margin-top: 10px;*/
+        }
+    </style>
+    <script>
+        jQuery(function () {
+            jQuery('a.btn-primary').click(function () {
+                var wh = jQuery('div.container').width;
+                alert(wh);
+                console.log(wh);
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="container">
+    <div class="text-center" style="width: 35%;margin: 10px auto">
+        <div style="background:#a2c4cf; padding: 20px; margin: 20px auto" class="thumbnail">
+            <form class="">
+                <div class="row clearfix">
+                    <div class="thumbnail ">
+                        <div class="input-group  ">
+                            <label for="user" class="input-group-addon"><span class="glyphicon glyphicon-user"></span></label>
+                            <input class=" form-control" type="text" name="user" id="user" placeholder="email or phon">
+                        </div>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="thumbnail bg-warning">
+                        <div class="input-group">
+                            <label for="psw" class="control-label input-group-addon"><span class="glyphicon glyphicon-lock"></span></label>
+                            <input class="form-control" type="password" name="psw" id="psw" placeholder="please enter pwd">
+                        </div>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <a class="btn btn-primary">sign up</a>
+                    <a class="btn btn-default" >sign in</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
