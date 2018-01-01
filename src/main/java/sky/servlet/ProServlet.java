@@ -55,9 +55,18 @@ public class ProServlet extends HttpServlet {
 
     public String select(HttpServletRequest request, HttpServletResponse response)
             throws  IOException {
+        String search = request.getParameter("search");
+
         ProductServ pro = new ProductServ();
-        response.getWriter().print(pro.selectJson());
-        return null;
+        if(search!=null&&search.equals("")){
+            search =search.trim().toLowerCase();
+            response.getWriter().print(pro.search(search));
+            return null;
+        }else {
+            response.getWriter().print(pro.selectJson());
+            return null;
+        }
+
     }
     public String updateQuantity(HttpServletRequest request, HttpServletResponse response) throws IOException{
         String val = request.getParameter("changeval");

@@ -24,11 +24,11 @@ public class Product {
     @Column("date_product")
     private String date;
     private String serialNo;
-//    @Column("reorder_level")
+    //    @Column("reorder_level")
     private String reorderLevel;
     private String reorderQuantity;
     private String reorderLeadtime;
-
+    private int temp;
     //    product_no, product_name, unitprice, date_product, pic_no, category,category_no
 
     public Product() {
@@ -60,7 +60,7 @@ public class Product {
     public Product(String no, String name, String path,
                    String category, String categoryNo, int unitPrice,
                    int quantity, String date, String serialNo, String
-                           reorderLevel, String reorderQuantity, String reorderLeadtime) {
+                           reorderLevel, String reorderQuantity, String reorderLeadtime,int temp) {
         this.no = no;
         this.name = name;
         this.path = path;
@@ -73,6 +73,15 @@ public class Product {
         this.reorderLevel = reorderLevel;
         this.reorderQuantity = reorderQuantity;
         this.reorderLeadtime = reorderLeadtime;
+        this.temp = 0;
+    }
+
+    public int getTemp() {
+        return temp;
+    }
+
+    public void setTemp() {
+        this.temp = 0;
     }
 
     public String getNo() {

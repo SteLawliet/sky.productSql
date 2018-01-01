@@ -39,10 +39,13 @@ public class DaoBean<T> {
         this.tableName = tableName;
 
     }
-
     public DaoBean(Class<T> tClass) {
         this.beanClass = tClass;
         tableName = ((TableName) beanClass.getAnnotation(TableName.class)).value();
+    }
+    public DaoBean(Class<T> tClass,String tableName) {
+        this.beanClass = tClass;
+        this. tableName = tableName;
     }
 
     protected DaoBean() {
@@ -85,6 +88,33 @@ public class DaoBean<T> {
 
     }
 
+    public List<T> FindAll(String search) {
+        String sql = "Select * from " + this.tableName +" where product_name  like \'%"+search+"%\'  or category ="+"\""+search+"\"" ;
+        QueryRunner qR = new QueryRunner(ds);
+        List<T> list = null;
+        try {
+            list = (List<T>) qR.query(sql, new MyListBeanHandler<T>(beanClass));
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return list;
+
+    }
+
+    public Boolean set(String change) {
+        String sql = " UPDATE " + tableName + " SET " + change;
+        System.out.println(sql);
+        int re = 0;
+        try {
+            re = new QueryRunner(ds).update(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return re > 0;
+    }
+
     public String update(String changeColumn,String changeVal,String noName,String whereNo){
         String sql = " UPDATE "+tableName+ " SET "+changeColumn + " = "+changeVal+" where "+noName+" =\'"+whereNo+"\'";
         System.out.println(sql);
@@ -102,10 +132,35 @@ public class DaoBean<T> {
         return changeVal;
     }
 
+    public void tempChange(String changeNo,int changeVal){
+        String sql = " UPDATE "+tableName+ " SET "+changeNo+ " = "+changeVal;
+        System.out.println(sql);
+        try {
+            new QueryRunner(ds).update(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void tempChange(String[] changes){
+        StringBuffer valPre =new StringBuffer("?");
+
+        for (int i = 0;i<changes.length-1;i++){
+            valPre=valPre.append(",?");
+        }
+        String sql = "Insert "+this.tableName+" VALUES ("+valPre.toString()+")";
+        QueryRunner qr = new QueryRunner(ds);
+        try {
+            qr.update(sql,changes);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 
 
-        public int AddMap(List<Map<String, String>> mapList){
+
+    public int AddMap(List<Map<String, String>> mapList){
 
         int size = mapList.get(0).size();
 
@@ -134,7 +189,7 @@ public class DaoBean<T> {
         QueryRunner qr = new QueryRunner(ds);
         int re = 0;
         try {
-           re =  qr.batch(sql,params).length;
+            re =  qr.batch(sql,params).length;
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -155,7 +210,7 @@ public class DaoBean<T> {
         Object[] p = getValue(t);
         QueryRunner queryRunner = new QueryRunner(ds);
         try {
-             int count =queryRunner.update(sql, p);
+            int count =queryRunner.update(sql, p);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -212,6 +267,9 @@ public class DaoBean<T> {
         }
         return number != null ? number.intValue() : 0;
 
+    }
+    public DataSource getDs(){
+        return ds;
     }
 
 
