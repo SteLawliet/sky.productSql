@@ -1,7 +1,7 @@
 package sky.domain;
 
 /**
- * Created by Stelawliet on 17/12/17.
+ * Created by 赵子齐 on 17/12/17.
  */
 public class FileBean {
 

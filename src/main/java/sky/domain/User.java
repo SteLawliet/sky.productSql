@@ -4,7 +4,7 @@ import sky.Annotation.Column;
 import sky.Annotation.TableName;
 
 /**
- * Created by Stelawliet on 17/11/6.
+ * Created by 赵子齐 on 17/11/6.
  */
 @TableName("table_user")
 public class User {

@@ -4,7 +4,7 @@ import sky.Annotation.Column;
 import sky.Annotation.TableName;
 
 /**
- * Created by Stelawliet on 17/12/20.
+ * Created by 赵子齐 on 17/12/20.
  */
 @TableName("j_table")
 public class JavaBean {

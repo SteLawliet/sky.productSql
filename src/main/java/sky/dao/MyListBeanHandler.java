@@ -16,7 +16,7 @@ import java.util.Map;
 import sky.Annotation.Column;
 
 /**
- * Created by Stelawliet on 17/12/21.
+ * Created by 赵子齐 on 17/12/21.
  */
 public class MyListBeanHandler<T> implements ResultSetHandler {
 
@@ -26,7 +26,7 @@ public class MyListBeanHandler<T> implements ResultSetHandler {
 
     private Map<String, String> beanMap;
 
-    private  List<T> list = new ArrayList<>();
+    private List<T> list = new ArrayList<>();
 
     public MyListBeanHandler(Class<T> tClass) {
         this.TClass = tClass;
@@ -51,7 +51,7 @@ public class MyListBeanHandler<T> implements ResultSetHandler {
 
                 for (Map.Entry<String, String> e : beanMap.entrySet()) {
 
-                    if (e.getValue()!=null&&e.getValue().equals(metaData.getColumnName(i))) {
+                    if (e.getValue() != null && e.getValue().equals(metaData.getColumnName(i))) {
                         beanMap.put(e.getKey(), rs.getString(i));
 
                         break;
@@ -78,8 +78,6 @@ public class MyListBeanHandler<T> implements ResultSetHandler {
         }
 
 
-
-
         return list;
     }
 
@@ -93,7 +91,6 @@ public class MyListBeanHandler<T> implements ResultSetHandler {
             }
             map.put(f.getName(), f.getAnnotation(Column.class).value());
         }
-
         return map;
     }
 

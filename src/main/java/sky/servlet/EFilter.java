@@ -13,9 +13,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Created by Stelawliet on 17/12/29.
+ * Created by 赵子齐 on 17/12/29.
+ * 编码处理过滤器
  */
-@WebFilter(filterName = "EFilter",urlPatterns = "/*")
+@WebFilter(filterName = "EFilter", urlPatterns = "/*")
 public class EFilter implements Filter {
     public void destroy() {
     }

@@ -4,7 +4,7 @@ import sky.Annotation.Column;
 import sky.Annotation.TableName;
 
 /**
- * Created by Stelawliet on 17/12/30.
+ * Created by 赵子齐 on 17/12/30.
  */
 @TableName("product")
 public class Product {
@@ -24,16 +24,15 @@ public class Product {
     @Column("date_product")
     private String date;
     private String serialNo;
-    //    @Column("reorder_level")
+    @Column("reorder_level")
     private String reorderLevel;
     private String reorderQuantity;
     private String reorderLeadtime;
-    private int temp;
+    private int temp = 0;
     //    product_no, product_name, unitprice, date_product, pic_no, category,category_no
 
     public Product() {
     }
-
 
 
     public Product(String no) {
@@ -60,7 +59,7 @@ public class Product {
     public Product(String no, String name, String path,
                    String category, String categoryNo, int unitPrice,
                    int quantity, String date, String serialNo, String
-                           reorderLevel, String reorderQuantity, String reorderLeadtime,int temp) {
+                           reorderLevel, String reorderQuantity, String reorderLeadtime, int temp) {
         this.no = no;
         this.name = name;
         this.path = path;
@@ -73,15 +72,15 @@ public class Product {
         this.reorderLevel = reorderLevel;
         this.reorderQuantity = reorderQuantity;
         this.reorderLeadtime = reorderLeadtime;
-        this.temp = 0;
+        this.temp = temp;
     }
 
     public int getTemp() {
         return temp;
     }
 
-    public void setTemp() {
-        this.temp = 0;
+    public void setTemp(int temp) {
+        this.temp = temp;
     }
 
     public String getNo() {
@@ -180,9 +179,8 @@ public class Product {
         this.reorderLeadtime = reorderLeadtime;
     }
 
-    @Override
-    public String toString() {
-        return "product{" +
+    public String toString0() {
+        return "Product{" +
                 "no='" + no + '\'' +
                 ", name='" + name + '\'' +
                 ", path='" + path + '\'' +
@@ -195,9 +193,15 @@ public class Product {
                 ", reorderLevel='" + reorderLevel + '\'' +
                 ", reorderQuantity='" + reorderQuantity + '\'' +
                 ", reorderLeadtime='" + reorderLeadtime + '\'' +
+                ", temp=" + temp +
                 '}';
     }
 
-
-
+    @Override
+    public String toString() {
+        return "Product{" +
+                "no='" + no + '\'' +
+                ", temp=" + temp +
+                '}';
+    }
 }

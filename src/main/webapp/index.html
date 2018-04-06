@@ -2,9 +2,454 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 引入 Bootstrap -->
+    <link href="bootstrap-3.3.7-dist/css/bootstrap.css"
+          rel="stylesheet">
+    <!-- jQuery (Bootstrap 的 JavaScript 插件需要引入 jQuery) -->
+    <script src="bootstrap-3.3.7-dist/js/jquery-3.2.js"></script>
+    <!-- 包括所有已编译的插件 -->
+    <script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <script src="bootstrap-3.3.7-dist/js/jquery.cookie.js"></script>
+    <script src="my.js"></script>
+    <title>库存管理系统</title>
+    <style>
+
+        .img_w {
+            width: 100%;
+        }
+
+        .thumbnail:hover, tr:hover {
+            border-color: #6d8691;
+            outline: 0;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+            box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+        }
+
+        .pro0, .tran_pro_clone, .tran_clone {
+            display: none;
+        }
+
+        .btn {
+            /*background: #327ab7;*/
+        }
+
+        .myico {
+            /*text-shadow: rgb(103, 185, 255) 2px 2px 10px;*/
+        }
+
+        .nav_active {
+            background: #e2e2e2;
+        }
+
+        .color_bu {
+            color: #327ab7;
+        }
+
+        .bg_bu {
+            background-color: #327ab7;
+        }
+
+        .no_display {
+            display: none;
+        }
+
+        #show_trans tbody tr:nth-child(2n) {
+            background-color: rgba(204, 232, 248, 0.33);
+        }
+    </style>
 </head>
-<body>
-ssssss
+<body class="">
+<!--#f0eaf0-->
+<div class="container" style="background:rgba(0,0,0,0.08);">
+    <div class="row clearfix ">
+        <div class="col-md-12 column">
+            <div class="modal  fade clearfix " id="modal-login" role="dialog"
+                 aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog " style="width: 30%">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title" id="myModalLabel">
+                                login
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+                            <form id="f_login">
+                                <div class="row clearfix">
+                                    <div class="thumbnail col-md-10 col-md-offset-1">
+                                        <div class="input-group  ">
+                                            <label for="user" class="input-group-addon"><span class="glyphicon glyphicon-user"></span></label>
+                                            <input class=" form-control" type="text" name="username"
+                                                   id="user" placeholder="email or phone">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row clearfix">
+                                    <div class="thumbnail col-md-10 col-md-offset-1">
+                                        <div class="input-group">
+                                            <label for="psw" class="control-label input-group-addon"><span class="glyphicon glyphicon-lock"></span></label>
+                                            <input class="form-control" type="password" name="psw" id="psw" placeholder="please enter pwd">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" id="login_cancel"
+                                    data-dismiss="modal">cancel
+                            </button>
+                            <button type="button" class="btn btn-primary" id="login">login</button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="modal  fade clearfix " id="modal-signup" role="dialog"
+                 aria-labelledby="myModalLabel0" aria-hidden="true">
+                <div class="modal-dialog " style="width: 30%">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"
+                                    aria-hidden="true">×
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel0">
+                                signup
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+                            <form id="f_signup">
+                                <div class="row clearfix">
+                                    <div class="thumbnail col-md-10 col-md-offset-1">
+                                        <div class="input-group  ">
+                                            <label for="user" class="input-group-addon"><span
+                                                    class="glyphicon glyphicon-user"></span></label>
+                                            <input class=" form-control" type="text" name="username"
+                                                   id="user0" placeholder="email or phone">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row clearfix">
+                                    <div class="thumbnail col-md-10 col-md-offset-1">
+                                        <div class="input-group">
+                                            <label for="psw"
+                                                   class="control-label input-group-addon"><span
+                                                    class="glyphicon glyphicon-lock"></span></label>
+                                            <input class="form-control" type="password" name="psw"
+                                                   id="psw1" placeholder="please enter pwd">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row clearfix">
+                                    <div class="thumbnail col-md-10 col-md-offset-1">
+                                        <div class="input-group">
+                                            <label for="psw"
+                                                   class="control-label input-group-addon"><span
+                                                    class="glyphicon glyphicon-lock"></span></label>
+                                            <input class="form-control" type="password" name="psw0"
+                                                   id="psw2" placeholder="please enter pwd">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" id="signup_cancel"
+                                    data-dismiss="modal">cancel
+                            </button>
+                            <button type="button" class="btn btn-primary" id="signup">singup
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+                    <a class="navbar-brand myico" href="#" id="home"><span
+                            class="glyphicon glyphicon-book"
+                            style="color: #327ab7; font-size: 20px;"></span>&nbsp;Sky</a>
+                </div>
+
+                <div class="collapse navbar-collapse " id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav myico ">
+                        <li class="">
+                            <a href="#" class="" id="pro_in"><span class="glyphicon glyphicon-save"
+                                                                   style="color: #327ab7; font-size: 20px;"></span>入库</a>
+                        </li>
+                        <li class="">
+                            <a href="#" id="pro_out"><span class="glyphicon glyphicon-open"
+                                                           style="color: #327ab7; font-size: 20px;"></span>出库</a>
+                        </li>
+                        <li class="">
+                            <a href="#" id="pro_update"><span class="glyphicon glyphicon-list"
+                                                              style="color: #327ab7; font-size: 20px;"></span>
+                                交易记录</a>
+                        </li>
+                    </ul>
+                    <div class="navbar-form navbar-left">
+                        <div class="form-group">
+                            <input type="text" class="form-control" />
+                            <button  class="btn btn-primary search"><span class="glyphicon glyphicon-search"></span></button>
+                        </div>
+                    </div>
+                    <ul class="nav navbar-nav navbar-right" style="margin-right: 20px">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span
+                                    style="color: #327ab7; font-size: 20px" id="user_name"></span>&nbsp;<span
+                                    class="glyphicon glyphicon-user"
+                                    style="color: #327ab7; font-size: 20px;"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="#" id="lin" data-toggle="modal"
+                                       data-target="#modal-login"><span
+                                            class="glyphicon glyphicon-log-in"
+                                            style="color: #327ab7; font-size: 15px;"></span>&nbsp;login</a>
+                                </li>
+                                <li>
+                                    <a href="#" id="out"><span class="glyphicon glyphicon-log-out"
+                                                               style="color: #327ab7; font-size: 15px;"></span>&nbsp;out</a>
+                                </li>
+                                <li>
+                                    <a href="#" id="in" data-toggle="modal"
+                                       data-target="#modal-signup"><span
+                                            class="glyphicon glyphicon-new-window"
+                                            style="color: #327ab7; font-size: 15px;"></span>&nbsp;sign
+                                        up</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </nav>
+        </div>
+    </div>
+    <div class="row clearfix " id="show_index" style="margin-top: 60px">
+        <div class="col-md-8 column">
+            <div class="col-md-12 column  clearfix" style="margin-bottom:15px">
+                <ul class="nav nav-tabs  by_class">
+                    <li class="active">
+                        <a href="#" val="a"><span class="glyphicon glyphicon-tag color_bu active"
+                                                  style=" font-size: 20px;"></span>全部</a>
+                    </li>
+                    <li class="">
+                        <a href="#" val="b"><span class="glyphicon glyphicon-tag color_bu"
+                                                  style=" font-size: 20px;"></span>食品</a>
+                    </li>
+                    <li>
+                        <a href="#" val="c"><span class="glyphicon glyphicon-tag color_bu"
+                                                  style=" font-size: 20px;"></span>文具</a>
+                    </li>
+                    <li class="">
+                        <a href="#" val="d"><span class="glyphicon glyphicon-tag color_bu "
+                                                  style=" font-size: 20px;"></span>书籍</a>
+                    </li>
+                    <li class="">
+                        <a href="#" val="e"><span class="glyphicon glyphicon-tag color_bu"
+                                                  style=" font-size: 20px;"></span>电器</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="clearfix proBody row" style="margin-top: 20px">
+                <div class="col-md-3 pro0 ">
+                    <div class="thumbnail" style="height: 250px">
+                        <img alt="300x200" src="img/d/d004.jpg" class="img-responsive  img-thumbnail "/>
+                        <div class="caption product">
+                            <h6 class="name">Thumbnail label</h6>
+                            <span class="no" style="display: none"></span>
+                            <span class="pro_index" style="display: none"></span>
+                            <span class="price"></span>
+                            <div class="text-right">
+                                quantity:<span class="quantity"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <button class="btn btn-primary btn-xs add">+</button>
+                                <button class="btn btn-primary btn-xs sub">-</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <ul class="pagination pagination-md">
+                <li>
+                    <a href="javascript:void(0)" class="prevPage">Prev</a>
+                </li>
+            </ul>
+            <ul class="pagination pagination-md">
+                <li>
+                    <a href="#">1</a>
+                </li>
+                <li>
+                    <a href="#">2</a>
+                </li>
+                <li>
+                    <a href="#">3</a>
+                </li>
+                <li>
+                    <a href="#">4</a>
+                </li>
+            </ul>
+            <ul class="pagination pagination-md">
+                <li>
+                    <a href="javascript:void(0)" class="nextPage">Next</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-4 column" style="">
+            <form class="t_form">
+                <table class="table table-striped table-hover table-condensed" style="">
+                    <thead>
+                    <tr class="bg-primary">
+                        <th>
+                            编号
+                        </th>
+                        <th>
+                            产品
+                        </th>
+                        <th>
+                            库存
+                        </th>
+                        <th id="change">
+                            入库(+)
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody class="t_body temp_body">
+                    <tr class="tr_pro pro0">
+                        <td class="t_no"></td>
+                        <td class="t_name">TB - Monthly</td>
+                        <td class="t_quantity">01/04/2012</td>
+                        <td class="t_temp"><input class="i_temp" type="text" size="5" name="temp"
+                                                  style="background:none;outline:none;border:0;">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
+            <span>供应商</span>
+            <select id="select0">
+                <option value="0">选择</option>
+                <option value="walmart">walmart</option>
+                <option value="samsung">samsung</option>
+                <option value="alibaba">alibaba</option>
+                <option value="huawei">huawei</option>
+                <option value="haier">haier</option>
+                <option value="kfc">kfc</option>
+            </select>
+            <br>
+            <button type="button" class="btn btn-default btn-info t_confirm bg_bu">确认</button>
+        </div>
+    </div>
+    <div class="row clearfix no_display" id="show_tran"
+         style="margin-top: 90px;margin-bottom: 100%">
+        <div class="col-md-7 ">
+            <h5>交易订单记录</h5>
+            <table class="table table-striped table-hover table-bordered">
+                <thead class="bg-primary">
+                <tr>
+                    <th>
+                        订单编号
+                    </th>
+                    <th>
+                        日期
+                    </th>
+                    <th>
+                        操作人
+                    </th>
+                    <th>
+                        类型
+                    </th>
+                    <th>
+                        总价
+                    </th>
+                    <th>
+                        供应商
+                    </th>
+                    <th>
+                        操作
+                    </th>
+                </tr>
+                </thead>
+                <tbody id="show_tran_body">
+                <tr class="tran_clone">
+                    <td class="tran_no">no.1.no</td>
+                    <td class="tran_date">no.2.no</td>
+                    <td class="tran_desc">no.3.no</td>
+                    <td class="tran_inout">no.4.no</td>
+                    <td class="tran_unitprice">no.3.no</td>
+                    <td class="tran_supplier">no.4.no</td>
+                    <td class="tran_enter">
+                        <button class="btn btn-primary">确认</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-4">
+            <h5>详细产品记录</h5>
+            <table class="table table-striped table-hover table-bordered">
+                <thead class="bg-primary">
+                <tr>
+                    <th>编号</th>
+                    <th>类型</th>
+                    <th>名称</th>
+                    <th>单价</th>
+                    <th>库存</th>
+                    <th>变动</th>
+                </tr>
+                </thead>
+                <tbody id="show_pro_body">
+                <tr class="tran_pro_clone">
+                    <td class="__no">no.1.no</td>
+                    <td class="__category">no.2.no</td>
+                    <td class="__name">no.4.no</td>
+                    <td class="__price">no.3.no</td>
+                    <td class="__quantity">no.4.no</td>
+                    <td class="__temp">no.5.no</td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+
+    </div>
+
+    <div class="modal fade" id="modal_table" tabindex="-1" role="dialog"
+         aria-labelledby="table_label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title table-title" id="table_label">
+                        订单确认
+                    </h4>
+                </div>
+                <div class="modal-body submit_table">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                    </button>
+                    <button type="button" class="btn  t_submit bg_bu">
+                        submit
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+</div>
 </body>
 </html>

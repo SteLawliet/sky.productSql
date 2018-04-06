@@ -17,7 +17,7 @@ import java.util.Map;
 import sky.dao.DaoBean;
 
 /**
- * Created by Stelawliet on 17/12/30.
+ * Created by 赵子齐 on 17/12/30.
  */
 public class readExcel {
     /**
@@ -27,9 +27,10 @@ public class readExcel {
      * 李四   22  女   160
      * 每一行构成一个map，key值是列标题，value是列值。没有值的单元格其value值为null
      * 返回结果最外层的list对应一个excel文件，第二层的list对应一个sheet页，第三层的map对应sheet页中的一行
+     *
      * @throws Exception
      */
-    public static List<List<Map<String, String>>> read(String filepath) throws Exception{
+    public static List<List<Map<String, String>>> read(String filepath) throws Exception {
         String fileType = filepath.substring(filepath.lastIndexOf(".") + 1, filepath.length());
         InputStream is = null;
         Workbook wb = null;
@@ -42,7 +43,7 @@ public class readExcel {
                 throw new Exception("读取的不是excel文件");
             }
 
-            List<List<Map<String, String>>> result = new ArrayList<List<Map<String,String>>>();//对应excel文件
+            List<List<Map<String, String>>> result = new ArrayList<List<Map<String, String>>>();//对应excel文件
 
             int sheetSize = wb.getNumberOfSheets();
             for (int i = 0; i < sheetSize; i++) {//遍历sheet页
@@ -96,7 +97,7 @@ public class readExcel {
     public static void main(String[] args) {
         List<List<Map<String, String>>> lists = null;
         try {
-         lists = readExcel.read("/Users/zhaoziqi/Downloads/product-1/产品分类表0.xls");
+            lists = readExcel.read("/Users/zhaoziqi/Downloads/product-1/产品分类表0.xls");
         } catch (Exception e) {
             e.printStackTrace();
         }
